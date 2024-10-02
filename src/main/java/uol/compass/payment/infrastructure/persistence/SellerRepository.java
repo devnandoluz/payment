@@ -1,9 +1,15 @@
-package uol.compass.payment.domain.entities;
+package uol.compass.payment.infrastructure.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import uol.compass.payment.controller.api.Payment;
+import uol.compass.payment.domain.entities.Seller;
+
+import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface SalerRepository extends JpaRepository<Payment, Long> {
+public interface SellerRepository extends JpaRepository<Seller, Long> {
+    Optional<Seller> findByCode(UUID code);
+
+    boolean existsByCode(UUID code);
 }

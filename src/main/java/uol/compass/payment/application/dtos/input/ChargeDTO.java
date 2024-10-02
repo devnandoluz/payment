@@ -1,13 +1,20 @@
-package uol.compass.payment.application.dtos;
+package uol.compass.payment.application.dtos.input;
 
-import uol.compass.payment.domain.enums.ChargeStatus;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 public record ChargeDTO(
-        String id,
-        UUID sellerCod,
-        Double amount,
-        ChargeStatus status
+        @Size(min = 5, max = 255)
+        String description,
+
+        @NotNull
+        UUID sellerCode,
+
+        @Min(1)
+        BigDecimal amount
 ) {
 }

@@ -1,1 +1,30 @@
-spring.application.name=payment
+spring:
+  application:
+    name: payment
+  datasource:
+    url: jdbc:h2:file:./data/payment;DB_CLOSE_DELAY=-1;MODE=Oracle;AUTO_SERVER=TRUE;INIT=CREATE SCHEMA IF NOT EXISTS payment
+    driverClassName: org.h2.Driver
+    username: sa
+    password: sa
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  cloud:
+    aws:
+      region:
+        static: sa-east-1
+      credentials:
+        access-key: ${AWS_SQS_ACCESS_KEY}
+        secret-key: ${AWS_SQS_SECRET_KEY}
+      sqs:
+        endpoint: http://localhost:4566
+queues:
+  partial-payments: https://localhost.localstack.cloud:4566/000000000000/payment_partial
+  total-payments: https://localhost.localstack.cloud:4566/000000000000/payment_total
+  excessive-payments: https://localhost.localstack.cloud:4566/000000000000/payment_excessive
+
+server:
+  port: 8080

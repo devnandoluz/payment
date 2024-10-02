@@ -1,13 +1,14 @@
-package uol.compass.payment.application.dtos.input;
+package uol.compass.payment.application.dtos.output;
 
-import jakarta.validation.constraints.Size;
 import uol.compass.payment.domain.entities.Seller;
 
-public record SellerDTO(
-        @Size(min = 5, max = 255)
+import java.util.UUID;
+
+public record SellerOutputDTO(
+        UUID code,
         String name
 ) {
-    public SellerDTO(Seller entity) {
-        this(entity.getName());
+    public SellerOutputDTO(Seller entity) {
+        this(entity.getCode(), entity.getName());
     }
 }

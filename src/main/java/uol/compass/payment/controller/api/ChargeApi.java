@@ -4,29 +4,29 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uol.compass.payment.application.dtos.input.SellerDTO;
-import uol.compass.payment.application.dtos.output.SellerOutputDTO;
-import uol.compass.payment.application.services.SellerService;
+import uol.compass.payment.application.dtos.input.ChargeDTO;
+import uol.compass.payment.application.dtos.output.ChargeOutputDTO;
+import uol.compass.payment.application.services.ChargeService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/seller")
-public class SellerApi {
+@RequestMapping("/charge")
+public class ChargeApi {
 
-    private final SellerService service;
+    private final ChargeService service;
 
-    public SellerApi(SellerService service) {
+    public ChargeApi(ChargeService service) {
         this.service = service;
     }
 
     @PostMapping
-    public ResponseEntity<SellerOutputDTO> create(@RequestBody @Valid SellerDTO sellerDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(sellerDTO));
+    public ResponseEntity<ChargeOutputDTO> create(@RequestBody @Valid ChargeDTO chargeDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(chargeDTO));
     }
 
     @GetMapping
-    public ResponseEntity<List<SellerOutputDTO>> get() {
+    public ResponseEntity<List<ChargeOutputDTO>> findAll() {
         return ResponseEntity.ok(service.findAll());
     }
 }
